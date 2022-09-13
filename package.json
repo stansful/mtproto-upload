@@ -1,0 +1,26 @@
+{
+  "name": "mtproto-upload",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "format": "prettier --write src/**/*"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@mtproto/core": "^6.2.0",
+    "dotenv": "^16.0.2",
+    "ffprobe": "^1.1.2",
+    "ffprobe-static": "^3.1.0",
+    "input": "^1.0.1",
+    "md5": "^2.3.0",
+    "random-bigint": "^0.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^18.7.16",
+    "prettier": "^2.7.1"
+  }
+}
