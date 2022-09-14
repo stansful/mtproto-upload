@@ -28,7 +28,7 @@ const start = async () => {
 
 		if (!user) {
 			console.log('\nPlease enter code from telegram app:\n');
-			await auth.signIn(auth);
+			await auth.signIn();
 		}
 
 		const { chats } = await mtproto.call('messages.getAllChats', { except_ids: [] });
