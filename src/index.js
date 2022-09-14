@@ -43,7 +43,7 @@ const start = async () => {
 		const uploader = new UploadService(mtproto);
 		const inputFile = await uploader.uploadToServer(fileBuffer, fileId, videoName);
 
-		const message = 'Video with some message!';
+		const message = `Video name: ${videoName}`;
 		const sendingToChannel = {
 			_: 'inputPeerChannel',
 			channel_id: id,
