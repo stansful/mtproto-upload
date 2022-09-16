@@ -27,7 +27,7 @@ const start = async () => {
 		const user = await auth.getUser();
 
 		if (!user) {
-			console.log('\nPlease enter code from telegram app:\n');
+			console.log('\nPlease enter code from telegram app:');
 			await auth.signIn();
 		}
 
