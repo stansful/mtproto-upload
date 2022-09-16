@@ -18,7 +18,19 @@ class UploadService {
 			throw new Error('Number of file parts > than 3k');
 		}
 
-		await Promise.all(Array.from(Array(chunks).keys()).map(async (i) => {
+		// // sometimes does not work as expected (infinity upload)
+		// await Promise.all(Array.from(Array(chunks).keys()).map(async (i) => {
+		// 	const partSize = i === chunks - 1 ? imageSize % partMaxSize : partMaxSize;
+		// 	const part = fileBuffer.slice(i * partMaxSize, i * partMaxSize + partSize);
+		// 	await this.api.call('upload.saveBigFilePart', {
+		// 		file_id: fileId,
+		// 		file_part: i,
+		// 		file_total_parts: chunks,
+		// 		bytes: part,
+		// 	});
+		// }));
+
+		for await (const i of Array.from(Array(chunks).keys())) {
 			const partSize = i === chunks - 1 ? imageSize % partMaxSize : partMaxSize;
 			const part = fileBuffer.slice(i * partMaxSize, i * partMaxSize + partSize);
 			await this.api.call('upload.saveBigFilePart', {
@@ -27,7 +39,7 @@ class UploadService {
 				file_total_parts: chunks,
 				bytes: part,
 			});
-		}));
+		}
 
 		return {
 			_: 'inputFileBig',
