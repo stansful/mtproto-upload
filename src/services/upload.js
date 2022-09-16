@@ -18,7 +18,7 @@ class UploadService {
 			throw new Error('Number of file parts > than 3k');
 		}
 
-		for (let i = 0; i < chunks; i++) {
+		await Promise.all(Array.from(Array(chunks).keys()).map(async (i) => {
 			const partSize = i === chunks - 1 ? imageSize % partMaxSize : partMaxSize;
 			const part = fileBuffer.slice(i * partMaxSize, i * partMaxSize + partSize);
 			await this.api.call('upload.saveBigFilePart', {
@@ -27,7 +27,7 @@ class UploadService {
 				file_total_parts: chunks,
 				bytes: part,
 			});
-		}
+		}));
 
 		return {
 			_: 'inputFileBig',
